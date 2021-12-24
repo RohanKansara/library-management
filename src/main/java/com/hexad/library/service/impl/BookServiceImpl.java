@@ -2,6 +2,7 @@ package com.hexad.library.service.impl;
 
 import com.hexad.library.entity.Book;
 import com.hexad.library.exception.ResourceNotFoundException;
+import com.hexad.library.payload.response.BookResponse;
 import com.hexad.library.repository.BookRepository;
 import com.hexad.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class BookServiceImpl implements BookService {
     BookRepository bookRepository;
 
     @Override
-    public List<Book> findAllBooks() {
-        return bookRepository.findAll();
+    public BookResponse findAllBooks() {
+        return createBookResponse(bookRepository.findAll());
     }
 
     @Override
@@ -40,5 +41,11 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Book not found with ID %d", id)));
 
         bookRepository.deleteById(book.getId());
+    }
+
+    private BookResponse createBookResponse(List<Book> books) {
+        BookResponse bookResponse = new BookResponse();
+        bookResponse.setBooks(books);
+        return bookResponse;
     }
 }
