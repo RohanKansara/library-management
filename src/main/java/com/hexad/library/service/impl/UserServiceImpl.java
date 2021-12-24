@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
         userBookRequest.getBookRequestList().forEach(bookRequest -> {
             Book book = bookRepository.findByNameAndIsbn(bookRequest.getName(), bookRequest.getIsbn());
-            if(checkBookUserExists(user, book)) {
+            if (checkBookUserExists(user, book)) {
                 user.getBooks().remove(book);
                 book.setCopies(book.getCopies() + 1);
                 book.getUsers().remove(user);

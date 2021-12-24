@@ -4,8 +4,6 @@ import com.hexad.library.entity.Book;
 import com.hexad.library.exception.ResourceNotFoundException;
 import com.hexad.library.payload.response.BookResponse;
 
-import java.util.List;
-
 public interface BookService {
 
     BookResponse findAllBooks();
